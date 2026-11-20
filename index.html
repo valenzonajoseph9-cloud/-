@@ -48,21 +48,19 @@
       width: 100%;
     }
 
-    .cf-badge {
-      width: 34px;
-      height: 22px;
-      background-color: #f6821f;
-      border-radius: 5px;
+    .flow-icon-wrap {
+      width: 36px;
+      height: 36px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .cf-badge svg {
-      width: 22px;
-      height: 14px;
-      fill: #ffffff;
+    .flow-icon-wrap svg {
+      width: 36px;
+      height: 36px;
+      display: block;
     }
 
     .host-name {
@@ -185,9 +183,22 @@
   <section id="verify-gate" aria-label="Security Verification">
     <div class="verify-container">
       <div class="host-row">
-        <span class="cf-badge" aria-hidden="true">
-          <svg viewBox="0 0 64 36">
-            <path d="M46.4 13.3c-.5 0-1 .1-1.4.2C43.8 7.5 38.4 3 32 3c-6.8 0-12.5 5-13.5 11.6-.8-.4-1.8-.6-2.8-.6-4.1 0-7.5 3.4-7.5 7.5 0 .4 0 .8.1 1.2C4.6 24.4 2 27.6 2 31.4 2 35.9 5.6 39.5 10.1 39.5h36.3c7.2 0 13.1-5.9 13.1-13.1 0-7.2-5.9-13.1-13.1-13.1z"/>
+        <span class="flow-icon-wrap" aria-hidden="true">
+          <!-- Google Flow Mark -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="flowGradA" x1="6" y1="36" x2="24" y2="12" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4285F4"/>
+                <stop offset="100%" stop-color="#34A853"/>
+              </linearGradient>
+              <linearGradient id="flowGradB" x1="22" y1="36" x2="42" y2="14" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FBBC05"/>
+                <stop offset="100%" stop-color="#EA4335"/>
+              </linearGradient>
+            </defs>
+            <path d="M9 33.5C9 24.5 15.8 18 24.2 18C27.2 18 29.8 18.9 32 20.5" stroke="url(#flowGradA)" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="M16 34.5C16 27.5 21.5 22.5 28.5 22.5C33.8 22.5 38.2 26.2 39.2 31.2" stroke="url(#flowGradB)" stroke-width="6.5" stroke-linecap="round"/>
+            <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
           </svg>
         </span>
         <h1 class="host-name" id="host-display">loading...</h1>
@@ -237,7 +248,6 @@
     const mainContent = document.getElementById("main-content");
     const statusNote = document.getElementById("status-note");
 
-    // Ipakita ang current domain/hostname sa ibabaw
     const currentHost = window.location.hostname || "localhost";
     hostDisplay.textContent = currentHost;
     document.title = currentHost + " | Security Verification";
