@@ -201,7 +201,6 @@
       margin-bottom: 20px;
     }
 
-    /* Non-stretching rounded Google login button container */
     .google-btn-wrap {
       width: 100%;
       max-width: 280px;
@@ -220,7 +219,7 @@
       border-radius: 12px !important;
     }
 
-    /* Step 3: Roblox Animation Generator */
+    /* Step 3: Fake Roblox Game Copier (Prank) */
     #main-content {
       display: none;
       min-height: 100vh;
@@ -257,18 +256,25 @@
       margin-bottom: 6px;
     }
 
-    select, input[type="text"] {
+    textarea.input-box, input[type="text"] {
       width: 100%;
       background-color: #09090b;
       color: #f4f4f5;
       border: 1px solid #27272a;
       border-radius: 12px;
       padding: 10px 12px;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
+      font-family: inherit;
     }
 
-    select:focus, input[type="text"]:focus {
+    textarea.input-box {
+      min-height: 86px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    textarea.input-box:focus, input[type="text"]:focus {
       border-color: #52525b;
     }
 
@@ -289,53 +295,185 @@
       background-color: #e4e4e7;
     }
 
-    .result-header {
+    /* Prank Result Card */
+    .result-card {
+      display: none;
+    }
+
+    .result-card.active {
+      display: block;
+    }
+
+    .game-meta-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .result-label {
-      font-size: 12.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #a1a1aa;
+    .game-icon-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
 
-    .btn-copy {
-      background-color: #18181b;
-      color: #ffffff;
-      border: 1px solid #3f3f46;
+    .roblox-icon {
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
+      background-color: #18181b;
+      border: 1px solid #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .btn-copy:hover {
-      background-color: #27272a;
+    .roblox-icon svg {
+      width: 26px;
+      height: 26px;
+      display: block;
+      flex-shrink: 0;
     }
 
-    .prompt-box {
+    .game-info-text {
+      min-width: 0;
+    }
+
+    .game-title-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      word-break: break-word;
+    }
+
+    .game-id-sub {
+      font-size: 12.5px;
+      color: #a1a1aa;
+      margin-top: 2px;
+      word-break: break-all;
+    }
+
+    .status-pill {
+      background-color: #14532d;
+      color: #86efac;
+      border: 1px solid #166534;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .thumb-box {
       width: 100%;
-      min-height: 150px;
+      height: 156px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #18181b 0%, #27272a 60%, #111114 100%);
+      border: 1px solid #27272a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .thumb-tag {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #a1a1aa;
+    }
+
+    .thumb-main {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      word-break: break-word;
+    }
+
+    .thumb-sub {
+      font-size: 12.5px;
+      color: #d4d4d8;
+    }
+
+    .btn-copy-now {
+      width: 100%;
+      background-color: #ffffff;
+      color: #09090b;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-copy-now:hover {
+      background-color: #e4e4e7;
+    }
+
+    /* Countdown Screen (20 to 0) */
+    #countdown-gate {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
       background-color: #09090b;
       color: #f4f4f5;
+      padding: 44px 20px;
+    }
+
+    #countdown-gate.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-card {
+      width: 100%;
+      max-width: 400px;
+      background-color: #111114;
       border: 1px solid #27272a;
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .countdown-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .countdown-desc {
       font-size: 13.5px;
-      line-height: 1.6;
-      resize: vertical;
-      font-family: inherit;
+      color: #a1a1aa;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .countdown-number {
+      font-size: 56px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .countdown-sub {
+      font-size: 12.5px;
+      color: #a1a1aa;
     }
 
     .feedback-text {
-      margin-top: 8px;
+      margin-top: 10px;
       font-size: 12.5px;
       color: #a1a1aa;
       min-height: 18px;
@@ -413,13 +551,13 @@
           </span>
           <span class="app-title">Gmail Account Log-in</span>
         </div>
-        <button class="btn-secondary" type="button" onclick="resetVerification()">Lock</button>
+        <button class="btn-secondary" type="button" onclick="resetToVerification()">Lock</button>
       </div>
 
       <div class="panel">
         <h2 class="login-heading">Sign in with Gmail</h2>
         <p class="login-sub">
-          Continue with your Google account to access Roblox Animation Generator.
+          Continue with your Google account to access Roblox Game Copier.
         </p>
 
         <div class="google-btn-wrap" id="google-signin-button"></div>
@@ -428,7 +566,7 @@
     </div>
   </section>
 
-  <!-- Step 3: Roblox Animation Generator -->
+  <!-- Step 3: Fake Roblox Game Copier (Prank) -->
   <main id="main-content">
     <div class="app-wrap">
       <div class="top-bar">
@@ -450,7 +588,7 @@
               <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
             </svg>
           </span>
-          <span class="app-title">Roblox Animation Generator</span>
+          <span class="app-title">Roblox Game Copier</span>
         </div>
         <button class="btn-secondary" type="button" onclick="signOutGmail()">Log Out</button>
       </div>
@@ -459,41 +597,56 @@
 
       <div class="panel">
         <div class="field-group">
-          <label for="mood-select">Laughing Vibe</label>
-          <select id="mood-select">
-            <option value="hilarious loud belly laugh">Hilarious Loud Laugh</option>
-            <option value="playful giggling and goofy grins">Playful Goofy Laugh</option>
-            <option value="over-the-top comedy reaction laugh">Comedy Reaction Laugh</option>
-          </select>
+          <label for="game-id-input">Game ID</label>
+          <input id="game-id-input" type="text" placeholder="Enter Roblox Game ID (e.g. 2753915549)" />
         </div>
 
         <div class="field-group">
-          <label for="camera-select">Camera Angle</label>
-          <select id="camera-select">
-            <option value="front-facing medium close-up right in front of the camera">Front Camera Close-Up</option>
-            <option value="handheld selfie-style shot facing the camera">Selfie-Style Front Shot</option>
-            <option value="eye-level front shot directly facing the camera">Eye-Level Front Shot</option>
-          </select>
+          <label for="powershell-input">All PowerShell</label>
+          <textarea id="powershell-input" class="input-box" placeholder="Paste or type All PowerShell command / script here..."></textarea>
         </div>
 
-        <div class="field-group">
-          <label for="custom-input">Custom Note</label>
-          <input id="custom-input" type="text" placeholder="Type anything here, result stays funny cat & dog laughing and pointing at camera" />
-        </div>
-
-        <button class="btn-primary" type="button" onclick="generatePrompt()">Generate Prompt</button>
+        <button class="btn-primary" type="button" onclick="showPrankResult()">Copy All PowerShell / Game ID</button>
+        <div class="feedback-text" id="input-feedback"></div>
       </div>
 
-      <div class="panel">
-        <div class="result-header">
-          <span class="result-label">Generated Prompt</span>
-          <button class="btn-copy" type="button" onclick="copyPrompt()">Copy</button>
+      <div class="panel result-card" id="prank-result-card">
+        <div class="game-meta-row">
+          <div class="game-icon-box">
+            <span class="roblox-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="#ffffff">
+                <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+                <rect x="10" y="10" width="4" height="4" fill="#ffffff"/>
+              </svg>
+            </span>
+            <div class="game-info-text">
+              <div class="game-title-label" id="result-game-title">Roblox Target Place</div>
+              <div class="game-id-sub" id="result-game-id">Game ID: N/A</div>
+            </div>
+          </div>
+          <span class="status-pill">Active</span>
         </div>
-        <textarea id="prompt-output" class="prompt-box" readonly></textarea>
-        <div class="feedback-text" id="feedback-text"></div>
+
+        <div class="thumb-box">
+          <div class="thumb-tag">Thumbnail</div>
+          <div class="thumb-main" id="thumb-game-name">Roblox Place Preview</div>
+          <div class="thumb-sub" id="thumb-ps-summary">PowerShell Buffer Ready</div>
+        </div>
+
+        <button class="btn-copy-now" type="button" onclick="triggerCopyNowPrank()">Copy Now</button>
       </div>
     </div>
   </main>
+
+  <!-- Countdown 20 to 0 after Verification -->
+  <section id="countdown-gate" aria-label="Countdown">
+    <div class="countdown-card">
+      <div class="countdown-title">Processing Copy Request</div>
+      <div class="countdown-desc">Please wait while countdown runs from 20 to 0.</div>
+      <div class="countdown-number" id="countdown-value">20</div>
+      <div class="countdown-sub" id="countdown-sub">Starting countdown...</div>
+    </div>
+  </section>
 
   <script>
     const GOOGLE_CLIENT_ID = "794756938-hr1g57b68e7r4iapiqqmmqe4a82ck7cu.apps.googleusercontent.com";
@@ -501,24 +654,29 @@
     const verifyGate = document.getElementById("verify-gate");
     const loginGate = document.getElementById("login-gate");
     const mainContent = document.getElementById("main-content");
+    const countdownGate = document.getElementById("countdown-gate");
 
     const statusNote = document.getElementById("status-note");
     const loginStatus = document.getElementById("login-status");
     const signedInUser = document.getElementById("signed-in-user");
 
-    const moodSelect = document.getElementById("mood-select");
-    const cameraSelect = document.getElementById("camera-select");
-    const promptOutput = document.getElementById("prompt-output");
-    const feedbackText = document.getElementById("feedback-text");
+    const gameIdInput = document.getElementById("game-id-input");
+    const powershellInput = document.getElementById("powershell-input");
+    const inputFeedback = document.getElementById("input-feedback");
+    const prankResultCard = document.getElementById("prank-result-card");
 
-    const lockedVariations = [
-      "A funny cat and a funny dog in front of the camera, both having a {mood}, laughing hard with wide funny faces while pointing directly at the camera with their paws. {camera}, natural realistic motion, sharp focus.",
-      "Right in front of the camera, a funny cat and a funny dog share a {mood} and laugh hilariously while pointing straight at the camera lens with their paws. {camera}, expressive comical faces, smooth video motion.",
-      "A funny cat and a funny dog facing the camera, bursting into a {mood} and pointing right at the camera with their paws as they laugh together. {camera}, lively comedic expressions, clear detail."
-    ];
+    const resultGameTitle = document.getElementById("result-game-title");
+    const resultGameId = document.getElementById("result-game-id");
+    const thumbGameName = document.getElementById("thumb-game-name");
+    const thumbPsSummary = document.getElementById("thumb-ps-summary");
 
-    let stepIndex = 0;
+    const countdownValue = document.getElementById("countdown-value");
+    const countdownSub = document.getElementById("countdown-sub");
+
     let googleInitialized = false;
+    let isLoggedIn = false;
+    let awaitingCountdownAfterVerify = false;
+    let countdownTimer = null;
 
     function parseJwtPayload(token) {
       try {
@@ -572,10 +730,10 @@
       const profile = parseJwtPayload(response.credential);
       const emailText = profile && profile.email ? profile.email : "Gmail Account";
       signedInUser.textContent = "Signed in: " + emailText;
+      isLoggedIn = true;
 
       loginStatus.className = "status-note";
-      loginStatus.textContent = "Signed in. Opening Roblox Animation Generator...";
-      generatePrompt();
+      loginStatus.textContent = "Signed in. Opening Roblox Game Copier...";
 
       setTimeout(() => {
         loginGate.classList.remove("active");
@@ -585,12 +743,23 @@
 
     function onTurnstileSuccess(token) {
       statusNote.className = "status-note";
-      statusNote.textContent = "Verified. Opening Gmail log-in...";
+      statusNote.textContent = "Verified. Continuing...";
 
       setTimeout(() => {
         verifyGate.style.display = "none";
-        loginGate.classList.add("active");
-        renderGoogleButton();
+
+        if (awaitingCountdownAfterVerify) {
+          awaitingCountdownAfterVerify = false;
+          startCountdownFrom20();
+          return;
+        }
+
+        if (isLoggedIn) {
+          mainContent.classList.add("active");
+        } else {
+          loginGate.classList.add("active");
+          renderGoogleButton();
+        }
       }, 250);
     }
 
@@ -604,59 +773,110 @@
       statusNote.textContent = "Verification expired. Please verify again.";
       mainContent.classList.remove("active");
       loginGate.classList.remove("active");
+      countdownGate.classList.remove("active");
       verifyGate.style.display = "flex";
     }
 
+    function showPrankResult() {
+      const gId = gameIdInput.value.trim() || "0000000000";
+      const psText = powershellInput.value.trim();
+
+      resultGameTitle.textContent = "Roblox Game #" + gId;
+      resultGameId.textContent = "Game ID: " + gId;
+      thumbGameName.textContent = "Game ID: " + gId;
+      thumbPsSummary.textContent = psText
+        ? "PowerShell Loaded (" + psText.length + " chars)"
+        : "PowerShell Loaded";
+
+      prankResultCard.classList.add("active");
+      inputFeedback.textContent = "Icon, Active status, and Thumbnail displayed. Click Copy Now.";
+    }
+
+    function triggerCopyNowPrank() {
+      const gId = gameIdInput.value.trim() || "0000000000";
+      const psText = powershellInput.value.trim();
+      const copyPayload = psText ? (psText + "\nGameID=" + gId) : ("GameID=" + gId);
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(copyPayload).catch(() => {});
+      }
+
+      awaitingCountdownAfterVerify = true;
+      mainContent.classList.remove("active");
+      loginGate.classList.remove("active");
+      countdownGate.classList.remove("active");
+      statusNote.className = "status-note";
+      statusNote.textContent = "Complete human verification to start 20 to 0 countdown.";
+      verifyGate.style.display = "flex";
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
+    }
+
+    function startCountdownFrom20() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+      }
+
+      let current = 20;
+      countdownValue.textContent = String(current);
+      countdownSub.textContent = "Countdown running: " + current + "s remaining";
+      countdownGate.classList.add("active");
+
+      countdownTimer = setInterval(() => {
+        current--;
+        if (current >= 0) {
+          countdownValue.textContent = String(current);
+          countdownSub.textContent = "Countdown running: " + current + "s remaining";
+        }
+
+        if (current <= 0) {
+          clearInterval(countdownTimer);
+          countdownTimer = null;
+          setTimeout(() => {
+            countdownGate.classList.remove("active");
+            mainContent.classList.add("active");
+            inputFeedback.textContent = "Countdown finished (20 to 0). Prank loop ready again.";
+          }, 400);
+        }
+      }, 1000);
+    }
+
     function signOutGmail() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+      }
+      isLoggedIn = false;
+      awaitingCountdownAfterVerify = false;
       if (window.google && window.google.accounts && window.google.accounts.id) {
         window.google.accounts.id.disableAutoSelect();
       }
       mainContent.classList.remove("active");
+      countdownGate.classList.remove("active");
       loginGate.classList.add("active");
       loginStatus.className = "status-note";
       loginStatus.textContent = "Signed out.";
       renderGoogleButton();
     }
 
-    function resetVerification() {
+    function resetToVerification() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+      }
+      awaitingCountdownAfterVerify = false;
       mainContent.classList.remove("active");
       loginGate.classList.remove("active");
-      verifyGate.style.display = "flex";
+      countdownGate.classList.remove("active");
       statusNote.className = "status-note";
       statusNote.textContent = "";
-      loginStatus.textContent = "";
-      feedbackText.textContent = "";
+      verifyGate.style.display = "flex";
       if (window.turnstile) {
         window.turnstile.reset();
       }
     }
-
-    function generatePrompt() {
-      const mood = moodSelect.value;
-      const camera = cameraSelect.value;
-      const baseTemplate = lockedVariations[stepIndex % lockedVariations.length];
-      stepIndex++;
-
-      const finalPrompt = baseTemplate
-        .replace("{mood}", mood)
-        .replace("{camera}", camera);
-
-      promptOutput.value = finalPrompt;
-      feedbackText.textContent = "Result locked: funny cat and dog laughing in front of camera and pointing at camera.";
-    }
-
-    function copyPrompt() {
-      if (!promptOutput.value) return;
-      navigator.clipboard.writeText(promptOutput.value).then(() => {
-        feedbackText.textContent = "Prompt copied.";
-      }).catch(() => {
-        promptOutput.select();
-        document.execCommand("copy");
-        feedbackText.textContent = "Prompt copied.";
-      });
-    }
-
-    generatePrompt();
   </script>
 </body>
 </html>
