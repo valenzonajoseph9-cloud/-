@@ -29,7 +29,6 @@
       display: flex;
       justify-content: center;
       padding: 44px 24px 36px;
-      transition: opacity 0.25s ease;
     }
 
     .verify-container {
@@ -108,72 +107,179 @@
       color: #f87171;
     }
 
-    /* Main Page (Hidden until verified) */
+    /* AI Video Prompt Generator */
     #main-content {
       display: none;
       min-height: 100vh;
       width: 100%;
       background-color: #09090b;
       color: #f4f4f5;
-      padding: 36px 22px;
+      padding: 28px 18px 44px;
     }
 
     #main-content.active {
       display: block;
     }
 
-    .main-wrap {
-      max-width: 520px;
+    .app-wrap {
+      width: 100%;
+      max-width: 440px;
       margin: 0 auto;
     }
 
-    .main-header {
+    .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 18px;
+      gap: 10px;
+      padding-bottom: 16px;
       border-bottom: 1px solid #27272a;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    .main-title {
-      font-size: 22px;
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-left .flow-icon-wrap {
+      width: 26px;
+      height: 26px;
+    }
+
+    .brand-left .flow-icon-wrap svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .app-title {
+      font-size: 18px;
       font-weight: 700;
       color: #ffffff;
+      letter-spacing: -0.015em;
     }
 
-    .reset-btn {
+    .btn-secondary {
       background-color: #18181b;
       color: #e4e4e7;
       border: 1px solid #3f3f46;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 13px;
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 12.5px;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    .reset-btn:hover {
+    .btn-secondary:hover {
       background-color: #27272a;
     }
 
-    .card {
+    .panel {
       background-color: #111114;
       border: 1px solid #27272a;
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 12px;
+      padding: 16px;
       margin-bottom: 16px;
     }
 
-    .card h2 {
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #ffffff;
+    .field-group {
+      margin-bottom: 14px;
     }
 
-    .card p {
-      font-size: 14.5px;
-      line-height: 1.55;
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #d4d4d8;
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      background-color: #09090b;
+      color: #f4f4f5;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: #52525b;
+    }
+
+    .btn-primary {
+      width: 100%;
+      background-color: #ffffff;
+      color: #09090b;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .btn-primary:hover {
+      background-color: #e4e4e7;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .result-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: #a1a1aa;
+    }
+
+    .btn-copy {
+      background-color: #18181b;
+      color: #ffffff;
+      border: 1px solid #3f3f46;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-copy:hover {
+      background-color: #27272a;
+    }
+
+    .prompt-box {
+      width: 100%;
+      min-height: 150px;
+      background-color: #09090b;
+      color: #f4f4f5;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .feedback-text {
+      margin-top: 8px;
+      font-size: 12.5px;
+      color: #a1a1aa;
+      min-height: 18px;
     }
   </style>
 </head>
@@ -184,7 +290,6 @@
     <div class="verify-container">
       <div class="host-row">
         <span class="flow-icon-wrap" aria-hidden="true">
-          <!-- Google Flow Mark -->
           <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="flowGradA" x1="6" y1="36" x2="24" y2="12" gradientUnits="userSpaceOnUse">
@@ -225,19 +330,68 @@
     </div>
   </section>
 
-  <!-- Main Website Content (Shown after verification) -->
+  <!-- Main Website: AI Video Prompt Generator -->
   <main id="main-content">
-    <div class="main-wrap">
-      <div class="main-header">
-        <div class="main-title">Welcome</div>
-        <button class="reset-btn" type="button" onclick="resetVerification()">Lock Again</button>
+    <div class="app-wrap">
+      <div class="top-bar">
+        <div class="brand-left">
+          <span class="flow-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="flowGradMainA" x1="6" y1="36" x2="24" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4285F4"/>
+                  <stop offset="100%" stop-color="#34A853"/>
+                </linearGradient>
+                <linearGradient id="flowGradMainB" x1="22" y1="36" x2="42" y2="14" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#FBBC05"/>
+                  <stop offset="100%" stop-color="#EA4335"/>
+                </linearGradient>
+              </defs>
+              <path d="M9 33.5C9 24.5 15.8 18 24.2 18C27.2 18 29.8 18.9 32 20.5" stroke="url(#flowGradMainA)" stroke-width="6.5" stroke-linecap="round"/>
+              <path d="M16 34.5C16 27.5 21.5 22.5 28.5 22.5C33.8 22.5 38.2 26.2 39.2 31.2" stroke="url(#flowGradMainB)" stroke-width="6.5" stroke-linecap="round"/>
+              <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
+            </svg>
+          </span>
+          <span class="app-title">AI Video Prompt Generator</span>
+        </div>
+        <button class="btn-secondary" type="button" onclick="resetVerification()">Lock</button>
       </div>
 
-      <div class="card">
-        <h2>Verification Passed</h2>
-        <p>
-          Na-unlock na ang main page human ma-complete ang verification. Pwede na nimo ilisan ang sulod ani nga section para sa imong actual website.
-        </p>
+      <div class="panel">
+        <div class="field-group">
+          <label for="setting-select">Setting / Location</label>
+          <select id="setting-select">
+            <option value="cozy living room at home">Cozy Living Room</option>
+            <option value="outdoor sunny backyard">Sunny Backyard</option>
+            <option value="casual street vlog corner">Street Vlog Corner</option>
+            <option value="warm bedroom with soft lamp light">Warm Bedroom</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="style-select">Video Style</label>
+          <select id="style-select">
+            <option value="handheld smartphone vlog, realistic natural motion, high detail">Smartphone Vlog</option>
+            <option value="cinematic comedy scene, expressive facial movement, crisp lighting">Cinematic Comedy</option>
+            <option value="3D stylized animation, expressive eyes and gestures, smooth motion">3D Stylized</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="extra-note">Extra Action / Detail (Optional)</label>
+          <input id="extra-note" type="text" placeholder="Example: dog tilting head while laughing, cat pointing paw" />
+        </div>
+
+        <button class="btn-primary" type="button" onclick="generatePrompt()">Generate Prompt</button>
+      </div>
+
+      <div class="panel">
+        <div class="result-header">
+          <span class="result-label">Generated AI Video Prompt</span>
+          <button class="btn-copy" type="button" onclick="copyPrompt()">Copy</button>
+        </div>
+        <textarea id="prompt-output" class="prompt-box" readonly></textarea>
+        <div class="feedback-text" id="feedback-text"></div>
       </div>
     </div>
   </main>
@@ -248,18 +402,33 @@
     const mainContent = document.getElementById("main-content");
     const statusNote = document.getElementById("status-note");
 
+    const settingSelect = document.getElementById("setting-select");
+    const styleSelect = document.getElementById("style-select");
+    const extraNoteInput = document.getElementById("extra-note");
+    const promptOutput = document.getElementById("prompt-output");
+    const feedbackText = document.getElementById("feedback-text");
+
     const currentHost = window.location.hostname || "localhost";
     hostDisplay.textContent = currentHost;
     document.title = currentHost + " | Security Verification";
 
+    const sceneVariations = [
+      "A playful dog and a cute cat sitting side by side in a {setting}, laughing heartily with open mouths and joyful expressions while pointing directly toward the camera with their paws. {extra} Camera slowly zooms in slightly, {style}.",
+      "Close-up medium shot of a happy dog and a funny cat in a {setting}, bursting into laughter and extending one paw each to point straight at the camera lens as if reacting to a joke. {extra} Natural lighting, fluid motion, {style}.",
+      "A cheerful dog and an expressive cat together in a {setting}, laughing loudly with squinted eyes and wagging/twitching tails while pointing their paws right at the camera. {extra} Dynamic framing, {style}."
+    ];
+
+    let variationIndex = 0;
+
     function onTurnstileSuccess(token) {
       statusNote.className = "status-note";
-      statusNote.textContent = "Verified. Opening page...";
+      statusNote.textContent = "Verified. Opening generator...";
+      generatePrompt();
 
       setTimeout(() => {
         verifyGate.style.display = "none";
         mainContent.classList.add("active");
-      }, 300);
+      }, 250);
     }
 
     function onTurnstileError() {
@@ -279,10 +448,44 @@
       verifyGate.style.display = "flex";
       statusNote.className = "status-note";
       statusNote.textContent = "";
+      feedbackText.textContent = "";
       if (window.turnstile) {
         window.turnstile.reset();
       }
     }
+
+    function generatePrompt() {
+      const setting = settingSelect.value;
+      const style = styleSelect.value;
+      const extraRaw = extraNoteInput.value.trim();
+      const extra = extraRaw ? extraRaw.charAt(0).toUpperCase() + extraRaw.slice(1) + (/[.!?]$/.test(extraRaw) ? "" : ".") : "";
+
+      const template = sceneVariations[variationIndex % sceneVariations.length];
+      variationIndex++;
+
+      const prompt = template
+        .replace("{setting}", setting)
+        .replace("{style}", style)
+        .replace("{extra}", extra)
+        .replace(/\s+/g, " ")
+        .trim();
+
+      promptOutput.value = prompt;
+      feedbackText.textContent = "Prompt generated: dog and cat laughing and pointing at the camera.";
+    }
+
+    function copyPrompt() {
+      if (!promptOutput.value) return;
+      navigator.clipboard.writeText(promptOutput.value).then(() => {
+        feedbackText.textContent = "Prompt copied to clipboard.";
+      }).catch(() => {
+        promptOutput.select();
+        document.execCommand("copy");
+        feedbackText.textContent = "Prompt copied.";
+      });
+    }
+
+    generatePrompt();
   </script>
 </body>
 </html>
