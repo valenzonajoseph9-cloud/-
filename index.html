@@ -308,7 +308,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 14px;
     }
 
@@ -319,23 +319,15 @@
       min-width: 0;
     }
 
-    .roblox-icon {
-      width: 48px;
-      height: 48px;
+    .real-game-icon {
+      width: 52px;
+      height: 52px;
       border-radius: 12px;
+      object-fit: cover;
       background-color: #18181b;
       border: 1px solid #27272a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
-    }
-
-    .roblox-icon svg {
-      width: 26px;
-      height: 26px;
       display: block;
-      flex-shrink: 0;
     }
 
     .game-info-text {
@@ -350,10 +342,18 @@
     }
 
     .game-id-sub {
-      font-size: 12.5px;
+      font-size: 12px;
       color: #a1a1aa;
       margin-top: 2px;
       word-break: break-all;
+    }
+
+    .badges-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0;
     }
 
     .status-pill {
@@ -361,46 +361,45 @@
       color: #86efac;
       border: 1px solid #166534;
       border-radius: 999px;
-      padding: 5px 11px;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .thumb-box {
-      width: 100%;
-      height: 156px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #18181b 0%, #27272a 60%, #111114 100%);
-      border: 1px solid #27272a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .thumb-tag {
+      padding: 4px 10px;
       font-size: 11.5px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    }
+
+    .playing-pill {
+      background-color: #18181b;
+      color: #e4e4e7;
+      border: 1px solid #3f3f46;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .thumb-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #18181b;
+      border: 1px solid #27272a;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .real-game-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb-caption {
+      font-size: 12px;
       color: #a1a1aa;
-    }
-
-    .thumb-main {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.45;
       word-break: break-word;
-    }
-
-    .thumb-sub {
-      font-size: 12.5px;
-      color: #d4d4d8;
     }
 
     .btn-copy-now {
@@ -597,8 +596,8 @@
 
       <div class="panel">
         <div class="field-group">
-          <label for="game-id-input">Game ID</label>
-          <input id="game-id-input" type="text" placeholder="Enter Roblox Game ID (e.g. 2753915549)" />
+          <label for="game-id-input">Game ID / Place ID</label>
+          <input id="game-id-input" type="text" placeholder="Enter Roblox Game or Place ID (e.g. 2753915549)" />
         </div>
 
         <div class="field-group">
@@ -606,32 +605,30 @@
           <textarea id="powershell-input" class="input-box" placeholder="Paste or type All PowerShell command / script here..."></textarea>
         </div>
 
-        <button class="btn-primary" type="button" onclick="showPrankResult()">Copy All PowerShell / Game ID</button>
+        <button class="btn-primary" type="button" id="fetch-game-btn" onclick="loadRobloxGameInfo()">Copy All PowerShell / Game ID</button>
         <div class="feedback-text" id="input-feedback"></div>
       </div>
 
       <div class="panel result-card" id="prank-result-card">
         <div class="game-meta-row">
           <div class="game-icon-box">
-            <span class="roblox-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="#ffffff">
-                <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#ffffff" stroke-width="2.2"/>
-                <rect x="10" y="10" width="4" height="4" fill="#ffffff"/>
-              </svg>
-            </span>
+            <img id="real-game-icon" class="real-game-icon" alt="Game Icon" />
             <div class="game-info-text">
-              <div class="game-title-label" id="result-game-title">Roblox Target Place</div>
-              <div class="game-id-sub" id="result-game-id">Game ID: N/A</div>
+              <div class="game-title-label" id="result-game-title">Roblox Game</div>
+              <div class="game-id-sub" id="result-game-id">ID: N/A</div>
             </div>
           </div>
-          <span class="status-pill">Active</span>
+          <div class="badges-right">
+            <span class="status-pill">Active</span>
+            <span class="playing-pill" id="active-players-badge">Playing: 0</span>
+          </div>
         </div>
 
-        <div class="thumb-box">
-          <div class="thumb-tag">Thumbnail</div>
-          <div class="thumb-main" id="thumb-game-name">Roblox Place Preview</div>
-          <div class="thumb-sub" id="thumb-ps-summary">PowerShell Buffer Ready</div>
+        <div class="thumb-wrap">
+          <img id="real-game-thumb" class="real-game-thumb" alt="Game Thumbnail" />
         </div>
+
+        <div class="thumb-caption" id="thumb-caption">Thumbnail & PowerShell buffer ready.</div>
 
         <button class="btn-copy-now" type="button" onclick="triggerCopyNowPrank()">Copy Now</button>
       </div>
@@ -662,13 +659,16 @@
 
     const gameIdInput = document.getElementById("game-id-input");
     const powershellInput = document.getElementById("powershell-input");
+    const fetchGameBtn = document.getElementById("fetch-game-btn");
     const inputFeedback = document.getElementById("input-feedback");
     const prankResultCard = document.getElementById("prank-result-card");
 
+    const realGameIcon = document.getElementById("real-game-icon");
     const resultGameTitle = document.getElementById("result-game-title");
     const resultGameId = document.getElementById("result-game-id");
-    const thumbGameName = document.getElementById("thumb-game-name");
-    const thumbPsSummary = document.getElementById("thumb-ps-summary");
+    const activePlayersBadge = document.getElementById("active-players-badge");
+    const realGameThumb = document.getElementById("real-game-thumb");
+    const thumbCaption = document.getElementById("thumb-caption");
 
     const countdownValue = document.getElementById("countdown-value");
     const countdownSub = document.getElementById("countdown-sub");
@@ -677,6 +677,17 @@
     let isLoggedIn = false;
     let awaitingCountdownAfterVerify = false;
     let countdownTimer = null;
+
+    function createPlaceholderDataUrl(labelText, bgColor) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+        <rect width="640" height="360" fill="${bgColor || '#18181b'}"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#a1a1aa" font-family="Arial, sans-serif" font-size="22">${labelText}</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    realGameIcon.src = createPlaceholderDataUrl("ICON", "#18181b");
+    realGameThumb.src = createPlaceholderDataUrl("GAME THUMBNAIL", "#18181b");
 
     function parseJwtPayload(token) {
       try {
@@ -777,19 +788,115 @@
       verifyGate.style.display = "flex";
     }
 
-    function showPrankResult() {
-      const gId = gameIdInput.value.trim() || "0000000000";
+    async function fetchJsonWithFallback(targetUrl) {
+      try {
+        const directRes = await fetch(targetUrl);
+        if (directRes.ok) {
+          return await directRes.json();
+        }
+      } catch (e) {}
+
+      const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl);
+      const proxyRes = await fetch(proxyUrl);
+      if (!proxyRes.ok) {
+        throw new Error("Network request failed");
+      }
+      return await proxyRes.json();
+    }
+
+    function formatNumber(num) {
+      if (typeof num !== "number" || Number.isNaN(num)) return "0";
+      return num.toLocaleString("en-US");
+    }
+
+    async function loadRobloxGameInfo() {
+      const rawInput = gameIdInput.value.trim();
+      const numericId = rawInput.replace(/\D/g, "");
       const psText = powershellInput.value.trim();
 
-      resultGameTitle.textContent = "Roblox Game #" + gId;
-      resultGameId.textContent = "Game ID: " + gId;
-      thumbGameName.textContent = "Game ID: " + gId;
-      thumbPsSummary.textContent = psText
-        ? "PowerShell Loaded (" + psText.length + " chars)"
-        : "PowerShell Loaded";
+      if (!numericId) {
+        inputFeedback.textContent = "Please enter a valid numeric Roblox Game / Place ID.";
+        return;
+      }
+
+      fetchGameBtn.disabled = true;
+      fetchGameBtn.textContent = "Loading Game Data...";
+      inputFeedback.textContent = "Fetching real icon, active players, and thumbnail...";
+
+      let universeId = numericId;
+      let gameName = "Roblox Game #" + numericId;
+      let playingCount = 0;
+      let iconUrl = createPlaceholderDataUrl("ICON", "#18181b");
+      let thumbUrl = createPlaceholderDataUrl("NO THUMBNAIL", "#18181b");
+      let sourceNote = "Loaded via fallback preview.";
+
+      try {
+        // Resolve universeId from placeId if needed
+        try {
+          const placeData = await fetchJsonWithFallback(
+            `https://apis.roblox.com/universes/v1/places/${numericId}/universe`
+          );
+          if (placeData && placeData.universeId) {
+            universeId = String(placeData.universeId);
+          }
+        } catch (e) {}
+
+        // Fetch game details (name & playing count)
+        const gamesData = await fetchJsonWithFallback(
+          `https://games.roblox.com/v1/games?universeIds=${universeId}`
+        );
+
+        if (gamesData && Array.isArray(gamesData.data) && gamesData.data.length > 0) {
+          const info = gamesData.data[0];
+          if (info.name) gameName = info.name;
+          if (typeof info.playing === "number") playingCount = info.playing;
+          if (info.id) universeId = String(info.id);
+          sourceNote = "Real Roblox game data loaded.";
+        }
+
+        // Fetch real icon & thumbnail
+        try {
+          const iconData = await fetchJsonWithFallback(
+            `https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeId}&returnPolicy=PlaceHolder&size=150x150&format=Png&isCircular=false`
+          );
+          if (iconData && Array.isArray(iconData.data) && iconData.data[0] && iconData.data[0].imageUrl) {
+            iconUrl = iconData.data[0].imageUrl;
+          }
+        } catch (e) {}
+
+        try {
+          const thumbData = await fetchJsonWithFallback(
+            `https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${universeId}&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false`
+          );
+          if (
+            thumbData &&
+            Array.isArray(thumbData.data) &&
+            thumbData.data[0] &&
+            Array.isArray(thumbData.data[0].thumbnails) &&
+            thumbData.data[0].thumbnails[0] &&
+            thumbData.data[0].thumbnails[0].imageUrl
+          ) {
+            thumbUrl = thumbData.data[0].thumbnails[0].imageUrl;
+          }
+        } catch (e) {}
+      } catch (err) {
+        sourceNote = "Unable to reach live Roblox API directly; showing ID preview.";
+      }
+
+      resultGameTitle.textContent = gameName;
+      resultGameId.textContent = "ID: " + numericId + (universeId !== numericId ? " (Universe: " + universeId + ")" : "");
+      activePlayersBadge.textContent = "Active: " + formatNumber(playingCount);
+      realGameIcon.src = iconUrl;
+      realGameThumb.src = thumbUrl;
+
+      thumbCaption.textContent = psText
+        ? `${sourceNote} PowerShell ready (${psText.length} chars). Click Copy Now.`
+        : `${sourceNote} Click Copy Now to continue.`;
 
       prankResultCard.classList.add("active");
-      inputFeedback.textContent = "Icon, Active status, and Thumbnail displayed. Click Copy Now.";
+      inputFeedback.textContent = sourceNote;
+      fetchGameBtn.disabled = false;
+      fetchGameBtn.textContent = "Copy All PowerShell / Game ID";
     }
 
     function triggerCopyNowPrank() {
