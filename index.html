@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Security Verification</title>
+  <title>valenzonajoseph9-cloud.github.io | Security Verification</title>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     * {
@@ -63,8 +63,8 @@
     }
 
     .host-name {
-      font-size: 32px;
-      line-height: 1.15;
+      font-size: 28px;
+      line-height: 1.2;
       font-weight: 700;
       letter-spacing: -0.025em;
       color: #ffffff;
@@ -107,7 +107,7 @@
       color: #f87171;
     }
 
-    /* Main Page: AI Video Prompt Generator */
+    /* Main Page: Roblox Animation Generator */
     #main-content {
       display: none;
       min-height: 100vh;
@@ -306,7 +306,7 @@
             <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
           </svg>
         </span>
-        <h1 class="host-name" id="host-display">loading...</h1>
+        <h1 class="host-name" id="host-display">valenzonajoseph9-cloud.github.io</h1>
       </div>
 
       <h2 class="verify-title">Performing security verification</h2>
@@ -330,7 +330,7 @@
     </div>
   </section>
 
-  <!-- Main Website: AI Video Prompt Generator -->
+  <!-- Main Website: Roblox Animation Generator -->
   <main id="main-content">
     <div class="app-wrap">
       <div class="top-bar">
@@ -352,7 +352,7 @@
               <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
             </svg>
           </span>
-          <span class="app-title">AI Video Prompt Generator</span>
+          <span class="app-title">Roblox Animation Generator</span>
         </div>
         <button class="btn-secondary" type="button" onclick="resetVerification()">Lock</button>
       </div>
@@ -377,7 +377,7 @@
         </div>
 
         <div class="field-group">
-          <label for="custom-input">Custom Note (Ignored for Subject - Always Funny Cat & Dog)</label>
+          <label for="custom-input">Custom Note</label>
           <input id="custom-input" type="text" placeholder="Type anything here, result stays funny cat & dog laughing and pointing at camera" />
         </div>
 
@@ -396,22 +396,15 @@
   </main>
 
   <script>
-    const hostDisplay = document.getElementById("host-display");
     const verifyGate = document.getElementById("verify-gate");
     const mainContent = document.getElementById("main-content");
     const statusNote = document.getElementById("status-note");
 
     const moodSelect = document.getElementById("mood-select");
     const cameraSelect = document.getElementById("camera-select");
-    const customInput = document.getElementById("custom-input");
     const promptOutput = document.getElementById("prompt-output");
     const feedbackText = document.getElementById("feedback-text");
 
-    const currentHost = window.location.hostname || "localhost";
-    hostDisplay.textContent = currentHost;
-    document.title = currentHost + " | Security Verification";
-
-    // Fixed subject & action: funny cat and dog laughing in front of camera and pointing at camera
     const lockedVariations = [
       "A funny cat and a funny dog in front of the camera, both having a {mood}, laughing hard with wide funny faces while pointing directly at the camera with their paws. {camera}, natural realistic motion, sharp focus.",
       "Right in front of the camera, a funny cat and a funny dog share a {mood} and laugh hilariously while pointing straight at the camera lens with their paws. {camera}, expressive comical faces, smooth video motion.",
@@ -460,7 +453,6 @@
       const baseTemplate = lockedVariations[stepIndex % lockedVariations.length];
       stepIndex++;
 
-      // Always locks the output to funny cat and dog laughing in front of camera and pointing at camera
       const finalPrompt = baseTemplate
         .replace("{mood}", mood)
         .replace("{camera}", camera);
