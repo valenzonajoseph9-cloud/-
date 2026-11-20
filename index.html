@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>valenzonajoseph9-cloud.github.io | Security Verification</title>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     * {
       box-sizing: border-box;
@@ -21,7 +22,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Verification Gate */
+    /* Step 1: Human Verification Gate */
     #verify-gate {
       min-height: 100vh;
       width: 100%;
@@ -107,17 +108,17 @@
       color: #f87171;
     }
 
-    /* Main Page: Roblox Animation Generator */
-    #main-content {
+    /* Step 2: Gmail Account Log-in Screen */
+    #login-gate {
       display: none;
       min-height: 100vh;
       width: 100%;
       background-color: #09090b;
       color: #f4f4f5;
-      padding: 28px 18px 44px;
+      padding: 36px 18px 44px;
     }
 
-    #main-content.active {
+    #login-gate.active {
       display: block;
     }
 
@@ -179,8 +180,59 @@
       background-color: #111114;
       border: 1px solid #27272a;
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px 16px;
       margin-bottom: 16px;
+    }
+
+    .login-heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .login-sub {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      margin-bottom: 20px;
+    }
+
+    .google-btn-wrap {
+      width: 100%;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .client-id-box {
+      font-size: 12px;
+      color: #71717a;
+      word-break: break-all;
+      line-height: 1.45;
+    }
+
+    /* Step 3: Roblox Animation Generator */
+    #main-content {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      background-color: #09090b;
+      color: #f4f4f5;
+      padding: 28px 18px 44px;
+    }
+
+    #main-content.active {
+      display: block;
+    }
+
+    .user-badge {
+      font-size: 12.5px;
+      color: #a1a1aa;
+      margin-bottom: 14px;
+      word-break: break-word;
     }
 
     .field-group {
@@ -285,7 +337,7 @@
 </head>
 <body>
 
-  <!-- Human Verification Screen -->
+  <!-- Step 1: Human Verification Screen -->
   <section id="verify-gate" aria-label="Security Verification">
     <div class="verify-container">
       <div class="host-row">
@@ -330,7 +382,49 @@
     </div>
   </section>
 
-  <!-- Main Website: Roblox Animation Generator -->
+  <!-- Step 2: Gmail Account Log-in Screen -->
+  <section id="login-gate" aria-label="Gmail Account Log-in">
+    <div class="app-wrap">
+      <div class="top-bar">
+        <div class="brand-left">
+          <span class="flow-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="flowGradLoginA" x1="6" y1="36" x2="24" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4285F4"/>
+                  <stop offset="100%" stop-color="#34A853"/>
+                </linearGradient>
+                <linearGradient id="flowGradLoginB" x1="22" y1="36" x2="42" y2="14" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#FBBC05"/>
+                  <stop offset="100%" stop-color="#EA4335"/>
+                </linearGradient>
+              </defs>
+              <path d="M9 33.5C9 24.5 15.8 18 24.2 18C27.2 18 29.8 18.9 32 20.5" stroke="url(#flowGradLoginA)" stroke-width="6.5" stroke-linecap="round"/>
+              <path d="M16 34.5C16 27.5 21.5 22.5 28.5 22.5C33.8 22.5 38.2 26.2 39.2 31.2" stroke="url(#flowGradLoginB)" stroke-width="6.5" stroke-linecap="round"/>
+              <circle cx="38.5" cy="15.5" r="3.5" fill="#4285F4"/>
+            </svg>
+          </span>
+          <span class="app-title">Gmail Account Log-in</span>
+        </div>
+        <button class="btn-secondary" type="button" onclick="resetVerification()">Lock</button>
+      </div>
+
+      <div class="panel">
+        <h2 class="login-heading">Sign in with Gmail</h2>
+        <p class="login-sub">
+          Continue with your Google account to access Roblox Animation Generator.
+        </p>
+
+        <div class="google-btn-wrap" id="google-signin-button"></div>
+        <div class="status-note" id="login-status"></div>
+        <div class="client-id-box">
+          Client ID: 794756938-hr1g57b68e7r4iapiqqmmqe4a82ck7cu.apps.googleusercontent.com
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3: Roblox Animation Generator -->
   <main id="main-content">
     <div class="app-wrap">
       <div class="top-bar">
@@ -354,8 +448,10 @@
           </span>
           <span class="app-title">Roblox Animation Generator</span>
         </div>
-        <button class="btn-secondary" type="button" onclick="resetVerification()">Lock</button>
+        <button class="btn-secondary" type="button" onclick="signOutGmail()">Log Out</button>
       </div>
+
+      <div class="user-badge" id="signed-in-user">Signed in with Gmail</div>
 
       <div class="panel">
         <div class="field-group">
@@ -396,9 +492,15 @@
   </main>
 
   <script>
+    const GOOGLE_CLIENT_ID = "794756938-hr1g57b68e7r4iapiqqmmqe4a82ck7cu.apps.googleusercontent.com";
+
     const verifyGate = document.getElementById("verify-gate");
+    const loginGate = document.getElementById("login-gate");
     const mainContent = document.getElementById("main-content");
+
     const statusNote = document.getElementById("status-note");
+    const loginStatus = document.getElementById("login-status");
+    const signedInUser = document.getElementById("signed-in-user");
 
     const moodSelect = document.getElementById("mood-select");
     const cameraSelect = document.getElementById("camera-select");
@@ -412,15 +514,79 @@
     ];
 
     let stepIndex = 0;
+    let googleInitialized = false;
 
-    function onTurnstileSuccess(token) {
-      statusNote.className = "status-note";
-      statusNote.textContent = "Verified. Opening generator...";
+    function parseJwtPayload(token) {
+      try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function renderGoogleButton() {
+      const btnContainer = document.getElementById("google-signin-button");
+      if (!btnContainer || !window.google || !window.google.accounts || !window.google.accounts.id) {
+        loginStatus.className = "status-note error";
+        loginStatus.textContent = "Google Sign-In script is still loading or blocked.";
+        return;
+      }
+
+      if (!googleInitialized) {
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCredentialResponse
+        });
+        googleInitialized = true;
+      }
+
+      btnContainer.innerHTML = "";
+      window.google.accounts.id.renderButton(btnContainer, {
+        theme: "filled_black",
+        size: "large",
+        text: "signin_with",
+        shape: "rectangular",
+        width: 320
+      });
+    }
+
+    function handleGoogleCredentialResponse(response) {
+      if (!response || !response.credential) {
+        loginStatus.className = "status-note error";
+        loginStatus.textContent = "Gmail sign-in failed. Please try again.";
+        return;
+      }
+
+      const profile = parseJwtPayload(response.credential);
+      const emailText = profile && profile.email ? profile.email : "Gmail Account";
+      signedInUser.textContent = "Signed in: " + emailText;
+
+      loginStatus.className = "status-note";
+      loginStatus.textContent = "Signed in. Opening Roblox Animation Generator...";
       generatePrompt();
 
       setTimeout(() => {
-        verifyGate.style.display = "none";
+        loginGate.classList.remove("active");
         mainContent.classList.add("active");
+      }, 250);
+    }
+
+    function onTurnstileSuccess(token) {
+      statusNote.className = "status-note";
+      statusNote.textContent = "Verified. Opening Gmail log-in...";
+
+      setTimeout(() => {
+        verifyGate.style.display = "none";
+        loginGate.classList.add("active");
+        renderGoogleButton();
       }, 250);
     }
 
@@ -433,14 +599,28 @@
       statusNote.className = "status-note error";
       statusNote.textContent = "Verification expired. Please verify again.";
       mainContent.classList.remove("active");
+      loginGate.classList.remove("active");
       verifyGate.style.display = "flex";
+    }
+
+    function signOutGmail() {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        window.google.accounts.id.disableAutoSelect();
+      }
+      mainContent.classList.remove("active");
+      loginGate.classList.add("active");
+      loginStatus.className = "status-note";
+      loginStatus.textContent = "Signed out.";
+      renderGoogleButton();
     }
 
     function resetVerification() {
       mainContent.classList.remove("active");
+      loginGate.classList.remove("active");
       verifyGate.style.display = "flex";
       statusNote.className = "status-note";
       statusNote.textContent = "";
+      loginStatus.textContent = "";
       feedbackText.textContent = "";
       if (window.turnstile) {
         window.turnstile.reset();
