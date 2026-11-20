@@ -61,6 +61,7 @@
       width: 36px;
       height: 36px;
       display: block;
+      flex-shrink: 0;
     }
 
     .host-name {
@@ -142,6 +143,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
     .brand-left .flow-icon-wrap {
@@ -165,11 +167,12 @@
       background-color: #18181b;
       color: #e4e4e7;
       border: 1px solid #3f3f46;
-      border-radius: 8px;
-      padding: 7px 11px;
+      border-radius: 10px;
+      padding: 8px 13px;
       font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .btn-secondary:hover {
@@ -179,7 +182,7 @@
     .panel {
       background-color: #111114;
       border: 1px solid #27272a;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 18px 16px;
       margin-bottom: 16px;
     }
@@ -198,20 +201,23 @@
       margin-bottom: 20px;
     }
 
+    /* Non-stretching rounded Google login button container */
     .google-btn-wrap {
       width: 100%;
+      max-width: 280px;
       min-height: 44px;
+      border-radius: 12px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 14px;
     }
 
-    .client-id-box {
-      font-size: 12px;
-      color: #71717a;
-      word-break: break-all;
-      line-height: 1.45;
+    .google-btn-wrap > div,
+    .google-btn-wrap iframe {
+      max-width: 100% !important;
+      width: auto !important;
+      border-radius: 12px !important;
     }
 
     /* Step 3: Roblox Animation Generator */
@@ -256,7 +262,7 @@
       background-color: #09090b;
       color: #f4f4f5;
       border: 1px solid #27272a;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 10px 12px;
       font-size: 14px;
       outline: none;
@@ -271,7 +277,7 @@
       background-color: #ffffff;
       color: #09090b;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 12px 14px;
       font-size: 14px;
       font-weight: 700;
@@ -302,11 +308,12 @@
       background-color: #18181b;
       color: #ffffff;
       border: 1px solid #3f3f46;
-      border-radius: 6px;
-      padding: 5px 10px;
+      border-radius: 10px;
+      padding: 6px 12px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .btn-copy:hover {
@@ -319,7 +326,7 @@
       background-color: #09090b;
       color: #f4f4f5;
       border: 1px solid #27272a;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 12px;
       font-size: 13.5px;
       line-height: 1.6;
@@ -417,9 +424,6 @@
 
         <div class="google-btn-wrap" id="google-signin-button"></div>
         <div class="status-note" id="login-status"></div>
-        <div class="client-id-box">
-          Client ID: 794756938-hr1g57b68e7r4iapiqqmmqe4a82ck7cu.apps.googleusercontent.com
-        </div>
       </div>
     </div>
   </section>
@@ -553,8 +557,8 @@
         theme: "filled_black",
         size: "large",
         text: "signin_with",
-        shape: "rectangular",
-        width: 320
+        shape: "pill",
+        width: 240
       });
     }
 
